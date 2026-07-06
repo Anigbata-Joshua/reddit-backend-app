@@ -16,7 +16,7 @@ mongoose.connection.on('disconnected', () => {
     console.warn("⚠️ Disconnected from Reddit database. Attempting to reconnect...");
 });
 
-// 2. Clear, targeted database orchestration methods
+// Clear, targeted database orchestration methods
 export async function connectDatabase() {
     const options = {
         autoIndex: !env.isProduction,

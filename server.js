@@ -7,12 +7,12 @@ import { closeDatabase, connectDatabase } from './config/db.js';
 
 
 // ---- Routes imports -----
-import userRoutes from './routes/user.routes.js'
-import authRoutes from './routes/auth.routes.js'
-import commentRoutes from './routes/comment.routes.js'
-import communityRoutes from './routes/community.routes.js'
-import postRoutes from './routes/post.routes.js'
-import votesRoutes from './routes/votes.routes.js'
+import userRoutes from './routes/user.route.js'
+import authRoutes from './routes/auth.route.js'
+import commentRoutes from './routes/comment.route.js'
+import communityRoutes from './routes/community.route.js'
+import postRoutes from './routes/post.route.js'
+import votesRoutes from './routes/votes.route.js'
 
 // ---- Process Error Handlers -----
 process.on('uncaughtException', (error) => {

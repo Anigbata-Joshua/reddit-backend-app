@@ -16,3 +16,4 @@ export function generateId(type) {
 
     return `${prefix}_${crypto.randomBytes(6).toString('hex')}`;
 }
+export default generateId;
