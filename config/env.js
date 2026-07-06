@@ -17,6 +17,9 @@ export const env = {
     isProduction: process.env.NODE_ENV === "production",
     port: parseInt(process.env.NODE_PORT || "7000", 10),
 
+    //Uploads
+    uploadLimitMb: parseInt(process.env.UPLOAD_LIMIT_MB || '5', 10),
+
     //Database
     mongoURI: required("MONGO_URI"),
 
