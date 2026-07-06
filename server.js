@@ -12,7 +12,7 @@ import authRoutes from './routes/auth.route.js'
 import commentRoutes from './routes/comment.route.js'
 import communityRoutes from './routes/community.route.js'
 import postRoutes from './routes/post.route.js'
-import votesRoutes from './routes/votes.route.js'
+import votesRoutes from './routes/votes.routes.js'
 
 // ---- Process Error Handlers -----
 process.on('uncaughtException', (error) => {
