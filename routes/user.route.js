@@ -4,7 +4,7 @@ import { getUserProfile, updateProfile, uploadAvatar } from "../controllers/user
 const router = express.Router();
 router.get('/profile', getUserProfile);
 router.put('/update-profile', updateProfile);
-router.post('/update-profile', uploadAvatar);
+router.post('/avatar', uploadAvatar);
 
 
 
