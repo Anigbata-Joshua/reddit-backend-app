@@ -4,7 +4,7 @@ import generateId from '../utils/generateId.js';
 
 export const getCommunities = async (req, res) => {
     try {
-        const community = await Community.find().sort({ memberCount: -1 })
+        const community = await Community.find().sort({ memberCount: -1 , paginate: 20})
         const total = community?.length;
 
         if (!community) {

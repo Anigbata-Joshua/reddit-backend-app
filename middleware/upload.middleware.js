@@ -30,9 +30,6 @@ const fileFilter = (req, file, cb) => {
         cb(new Error("Only images (jpeg, jpg, png, webp) are allowed!"), false);
     }
 };
+const upload = multer({ storage, fileFilter, limits: { fileSize: env.uploadLimitMb * 1024 * 1024 } });
 
-export const upload = multer({
-    storage,
-    fileFilter,
-    limits: { fileSize: env.uploadLimitMb * 1024 * 1024 }
-}); 
+export default upload;
