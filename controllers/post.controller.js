@@ -79,7 +79,7 @@ export const createPost = async (req, res) => {
             });
 
         const postId = generateId('post');
-        const author = req.user.userId
+        const author = req.user.username
         const post = await Post.create({
             postId,
             communityId,
@@ -116,8 +116,7 @@ export const deletePost = async (req, res) => {
         }
 
         const userId = req.user.userId;
-        const isAuthor = post.author?.toString() === userId;
-
+        const isAuthor = post.author === req.user.username;
 
         if (!isAuthor) {
             return res.status(403).json({

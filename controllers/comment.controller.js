@@ -60,7 +60,7 @@ export const createComment = async (req, res) => {
 
 
         const commentId = generateId('comment');
-        const author = req.user.userId
+        const author = req.user.username
         const newComment = await Comment.create({
             postId,
             commentId,
@@ -96,10 +96,8 @@ export const deleteComment = async (req, res) => {
             });
         }
 
-        const userId = req.user.userId;
-        const isAuthor = comment.author?.toString() === userId;
 
-
+        const isAuthor = comment.author === req.user.username;
         if (!isAuthor) {
             return res.status(403).json({
                 success: false,
@@ -108,7 +106,7 @@ export const deleteComment = async (req, res) => {
         };
 
         await comment.deleteOne();
-        
+
         await Post.findOneAndUpdate(
             { postId: comment.postId },
             { $inc: { commentCount: -1 } }

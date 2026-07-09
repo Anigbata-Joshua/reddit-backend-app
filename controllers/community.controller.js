@@ -72,8 +72,8 @@ export const createCommunity = async (req, res) => {
             });
         }
 
-        const moderators = [req.user.userId];
-        const createdBy = req.user.userId;
+        const moderators = [req.user.username];
+        const createdBy = req.user.username;
         const communityId = generateId('community')
 
         const community = await Community.create({
