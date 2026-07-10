@@ -62,7 +62,7 @@ app.get('/api/health', (req, res) => {
 
 
 //---- Api Routes ----
-app.use('/api/user', userRoutes);// http://localhost:7000/api/user
+app.use('/api/users', userRoutes);// http://localhost:7000/api/users
 app.use('/api/auth', authRoutes);//http://localhost:7000/api/auth
 
 app.use('/api/post', postRoutes);//http://localhost:7000/api/post

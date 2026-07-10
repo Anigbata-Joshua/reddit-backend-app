@@ -2,36 +2,39 @@ import Post from '../models/Post.model.js';
 import generateId from '../utils/generateId.js';
 
 
-export const getAllPost = async (req, res) => {
-    try {
-        const { communityId, sort, page = 1, limit = 20 } = req.query;
-        const filter = communityId ? { communityId } : {};
+    export const getAllPost = async (req, res) => {
+        try {
+            const { communityId, sort, page = 1, limit = 20, search } = req.query;
 
-        const sortOrder = sort === 'oldest' ? { createdAt: 1 } : { createdAt: -1 };
-        const skip = (Number(page) - 1) * Number(limit);
+            const filter = {};
+            if (communityId) filter.communityId = communityId;
+            if (search) filter.$text = { $search: search };
 
-        const allPosts = await Post.find(filter)
-            .sort(sortOrder)
-            .skip(skip)
-            .limit(Number(limit));
+            const sortOrder = sort === 'oldest' ? { createdAt: 1 } : { createdAt: -1 };
+            const skip = (Number(page) - 1) * Number(limit);
 
-        const total = await Post.countDocuments(filter);
+            const allPosts = await Post.find(filter)
+                .sort(sortOrder)
+                .skip(skip)
+                .limit(Number(limit));
 
-        return res.status(200).json({
-            success: true,
-            message: "All posts fetched successfully",
-            total,
-            page: Number(page),
-            data: allPosts
-        });
+            const total = await Post.countDocuments(filter);
 
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: `Server Error: ${error.message}`
-        });
-    }
-};
+            return res.status(200).json({
+                success: true,
+                message: "All posts fetched successfully",
+                total,
+                page: Number(page),
+                data: allPosts
+            });
+
+        } catch (error) {
+            res.status(500).json({
+                success: false,
+                message: `Server Error: ${error.message}`
+            });
+        }
+    };
 
 export const getPost = async (req, res) => {
 
