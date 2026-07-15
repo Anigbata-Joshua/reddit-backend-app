@@ -39,9 +39,25 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));// parse form data
 app.use(express.json());
 
+const allowedOrigins = [
+    'http://localhost:5173', // Your local React development URL
+    'https://reddit-clone-ten.vercel.app' // Your Vercel production URL
+];
+
 app.use(cors({
-    origin: env.corsOrigins.length > 0 ? env.corsOrigins : "",
-    credentials: true
+    origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps, curl, or Postman)
+        if (!origin) return callback(null, true);
+
+        if (allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Blocked by CORS policy'));
+        }
+    },
+    credentials: true, // Set to true if you are passing cookies or auth headers
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 //---- Morgan for HTTP request logger -----
