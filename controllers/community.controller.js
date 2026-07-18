@@ -174,3 +174,19 @@ export const leaveCommunity = async (req, res) => {
         });
     }
 };
+
+export const uploadBanner = async (req, res) => {
+    try {
+        if (!req.file) return res.status(400).json({ success: false, message: 'No image provided' });
+        
+        const community = await Community.findOneAndUpdate(
+            { name: req.params.name },
+            { banner: req.file.path },
+            { new: true }
+        );
+        
+        res.status(200).json({ success: true, message: 'Banner updated', banner: community.banner });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
