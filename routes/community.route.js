@@ -1,6 +1,8 @@
 import express from "express";
 import { createCommunity, getCommunities, getCommunity, joinCommunity, leaveCommunity, uploadBanner } from '../controllers/community.controller.js'
 import { protect } from "../middleware/auth.middleware.js";
+import upload from "../middleware/upload.middleware.js";
+
 
 const router = express.Router();
 router.get('/', getCommunities);

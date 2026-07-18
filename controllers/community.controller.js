@@ -2,6 +2,7 @@ import Community from '../models/Community.model.js';
 import User from '../models/User.model.js';
 import generateId from '../utils/generateId.js';
 
+
 export const getCommunities = async (req, res) => {
     try {
         const community = await Community.find().sort({ memberCount: -1 })
